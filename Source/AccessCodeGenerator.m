@@ -136,7 +136,7 @@
     if (![model.keywords containsObject:ASSIGN]
         && ![model.dataType isEqualToString:ID]) {
         NSString *functionType = [model.keywords containsObject:CLASS] ? @"+" : @"-";
-        lazyGetter = [NSString stringWithFormat:@"\n%@ (%@ *)%@ {\n	if (!_%@) {\n        _%@ = [[%@ alloc] init];\n	}\n	return _%@;\n}",
+        lazyGetter = [NSString stringWithFormat:@"\n%@ (%@ *)%@ {\n	if (_%@ == nil) {\n        _%@ = [[%@ alloc] init];\n	}\n	return _%@;\n}",
                       functionType,
                       model.dataType,
                       model.name,
